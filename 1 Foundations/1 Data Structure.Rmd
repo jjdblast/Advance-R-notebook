@@ -1,5 +1,5 @@
 ---
-title: "Advance R - Data structure"
+title: "1 Data structure"
 author: "Lucas Shen"
 date: "August 10, 2015"
 output: html_document
