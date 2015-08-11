@@ -1,0 +1,16 @@
+---
+title: "5 functions"
+author: "Lucas Shen"
+date: "August 11, 2015"
+output: html_document
+---
+***
+
+```{r}
+library(pryr)
+```
+
+#Function components
+1. `body()`: the code inside the funciton
+2. `formals()`: list of args
+3. `environment()`: the map of the function's variables 
