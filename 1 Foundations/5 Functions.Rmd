@@ -8,9 +8,52 @@ output: html_document
 
 ```{r}
 library(pryr)
+library(dplyr)
 ```
 
 #Function components
 1. `body()`: the code inside the funciton
 2. `formals()`: list of args
-3. `environment()`: the map of the function's variables 
+3. `environment()`: location of the map to the function's variables 
+
+* `is.function()`
+* `is.primitive()`
+
+###exercise
+```{r}
+objs <- mget(ls("package:base"), inherits = TRUE)
+funs <- Filter(is.function, objs)
+```
+
+> Which base function has the most arguments?
+
+```{r}
+# my realization is keep piping untill you have to make a temp var, I don't know if this is a good practice. We'll see
+arg_length <- funs %>% sapply(function(x) length(formals(x))) # check this sapply use!
+which(arg_length == max(arg_length)) %>% names() # check which
+```
+
+> How many base functions have no arguments? What’s special about those functions?
+
+```{r}
+no_arg_fn_name <- which(arg_length == 0) %>% names()
+length(no_arg_fn_name)
+```
+
+> How could you adapt the code to find all primitive functions?
+
+```{r}
+objs %>% sapply(is.primitive) %>% sum() # this is answering how many
+objs[objs %>% sapply("is.primitive")] %>% names() %>% head(10) # show up first 10 names of primitive fn
+```
+
+***
+
+#Lexical scoping
+
+
+
+
+
+
+

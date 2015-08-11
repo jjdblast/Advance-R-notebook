@@ -69,14 +69,62 @@ img {
 
 
 <hr />
-<pre class="r"><code>library(pryr)</code></pre>
+<pre class="r"><code>library(pryr)
+library(dplyr)</code></pre>
+<pre><code>## 
+## Attaching package: 'dplyr'
+## 
+## The following object is masked from 'package:pryr':
+## 
+##     %.%
+## 
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+## 
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union</code></pre>
 <div id="function-components" class="section level1">
 <h1>Function components</h1>
 <ol style="list-style-type: decimal">
 <li><code>body()</code>: the code inside the funciton</li>
 <li><code>formals()</code>: list of args</li>
-<li><code>environment()</code>: the map of the function’s variables</li>
+<li><code>environment()</code>: location of the map to the function’s variables</li>
 </ol>
+<ul>
+<li><code>is.function()</code></li>
+<li><code>is.primitive()</code></li>
+</ul>
+<div id="exercise" class="section level3">
+<h3>exercise</h3>
+<pre class="r"><code>objs &lt;- mget(ls(&quot;package:base&quot;), inherits = TRUE)
+funs &lt;- Filter(is.function, objs)</code></pre>
+<blockquote>
+<p>Which base function has the most arguments?</p>
+</blockquote>
+<pre class="r"><code># my realization is keep piping untill you have to make a temp var, I don't know if this is a good practice. We'll see
+arg_length &lt;- funs %&gt;% sapply(function(x) length(formals(x))) # check this sapply use!
+which(arg_length == max(arg_length)) %&gt;% names() # check which</code></pre>
+<pre><code>## [1] &quot;scan&quot;</code></pre>
+<blockquote>
+<p>How many base functions have no arguments? What’s special about those functions?</p>
+</blockquote>
+<pre class="r"><code>no_arg_fn_name &lt;- which(arg_length == 0) %&gt;% names()
+length(no_arg_fn_name)</code></pre>
+<pre><code>## [1] 225</code></pre>
+<blockquote>
+<p>How could you adapt the code to find all primitive functions?</p>
+</blockquote>
+<pre class="r"><code>objs %&gt;% sapply(is.primitive) %&gt;% sum() # this is answering how many</code></pre>
+<pre><code>## [1] 183</code></pre>
+<pre class="r"><code>objs[objs %&gt;% sapply(&quot;is.primitive&quot;)] %&gt;% names() %&gt;% head(10) # show up first 10 names of primitive fn</code></pre>
+<pre><code>##  [1] &quot;-&quot;    &quot;:&quot;    &quot;!&quot;    &quot;!=&quot;   &quot;(&quot;    &quot;[&quot;    &quot;[[&quot;   &quot;[[&lt;-&quot; &quot;[&lt;-&quot;  &quot;{&quot;</code></pre>
+<hr />
+</div>
+</div>
+<div id="lexical-scoping" class="section level1">
+<h1>Lexical scoping</h1>
 </div>
 
 
