@@ -6,7 +6,7 @@ output: html_document
 ---
 
 ***
-#Introduction
+##Context
 > There are two meta-techniques that are tremendously helpful for improving your skills as an R programmer: **reading source code** and adopting a **scientific mindset**.
 
 ###1. reading source code:
@@ -17,16 +17,14 @@ output: html_document
 > If you don’t understand how something works, develop a hypothesis, design some experiments, run them, and record the results. And do it again untill you know enough or you know it's not enough.
   
 ***
-#Foundations
-##Data Structure
 ![](../pictures/data_struct.png)
 
 * no 0-d, scalar type, just vector of length 1
 * best way to understand a data strcuture in R:
-    * `str()`,it gives a compact, human readable description of any R data structure.
+    * `str()`, it gives a compact, human readable description of any R data structure.
 
 ***    
-###Vectors
+##Vectors
 `atomic vector` vs `list`
 
 * common property:
@@ -36,7 +34,7 @@ output: html_document
     
 * test: `is_atomic()`, `is_list()`
 
-####Atomic vector (same type)
+###Atomic vector (same type)
 usually created by using `c()`
 
 `1:10` will create integer vector
@@ -54,7 +52,7 @@ c("hello", "world") # character
 ```
 * missing value: `NA`
 
-#####Types and tests
+####Types and tests
 * `is.atomic()`
     * `is.character()`
     * `is.double()`
@@ -70,14 +68,14 @@ is.double(dbl_vec)
 is.atomic(dbl_vec)
 ```
 
-#####Coercion
+####Coercion
   * `as.character()`
   * `as.double()`
   * `as.integer()`
   * `as.logical()`
 
 ***
-####List (combine any type)
+###List (combine any type)
 recursive vector, created by using `list()`
 ```{r}
 x <- list(1:3, 'a', c(TRUE, TRUE), c(2.3,5.9))
@@ -91,13 +89,13 @@ y <- c(list(1, 2), c(3, 4)) # will combine two list into one list
 str(y)
 ```
 
-#####type, test, coercion
+####type, test, coercion
 * `is.list()`
 * `as.list()`
 * `unlist()`: make list into an atomic vector
 
 ***
-###Attribures
+##Attribures
 used to store metadata about the project. list of (tag, value) pairs
 ```{r attribute}
 y <- 1:10
@@ -107,7 +105,7 @@ attr(y, 'name') # read attribute
 str(attributes(y)) # use attributes(object) to get all attributes
 ```
 
-#####named vector
+####named vector
 ```{r named vector}
 x <- c(a=1, b=2, c=3)
 x <- 1:3; names(x) <- c('a', 'b', 'c')
@@ -122,7 +120,7 @@ x
 ```
 
 ***
-###Factors
+##Factors
 A factor is a vector that can **contain only predefined values**, and is used to store **categorical data**. Factors are useful when you know the possible values a variable may take, even if you don’t see all values in a given dataset.
 
 You must know we could only be M or F as a human.
@@ -136,7 +134,7 @@ table(sex_factor)
 ```
 
 ***
-###Matrices and arrays
+##Matrices and arrays
 * `matrix()`: 2-d array
 * `array()`: n-d array
 ```{r matrix and array}
@@ -154,12 +152,12 @@ So in vector, we are talking about names and length, here we have high dimension
 * `c()` -> `cbind()`, `rbind()`
 * `t()` -> `aperm()`
 
-####test and coercion
+###test and coercion
 * `is.matrix()`, `is.array()`
 * `as.matrix()`, `as.array()`
 
 ***
-###Data Frames
+##Data Frames
 creation: `data.frame()`, takes variable name and it's associate data. You could imaging that instilling data frame by columns.
 ```{r}
 df <- data.frame( x=1:3, 
@@ -178,7 +176,7 @@ You can coerce an object to a data frame with `as.data.frame()`:
 * A list will create one column for each element; it’s an error if they’re not all the same length.
 * A matrix will create a data frame with the same number of columns and rows as the matrix.
 
-#####Combining data frames
+####Combining data frames
 ```{r}
 cbind(df, data.frame(z = 3:1))
 rbind(df, data.frame(x = 10, y ='z'))

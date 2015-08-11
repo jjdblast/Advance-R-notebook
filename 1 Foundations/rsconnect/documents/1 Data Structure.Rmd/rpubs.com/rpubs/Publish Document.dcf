@@ -1,0 +1,7 @@
+name: Publish Document
+account: rpubs
+server: rpubs.com
+bundleId:
+        https://api.rpubs.com/api/v1/document/99767/697c61f4a3624aa2a265ef45fdd1749a
+url: http://rpubs.com/icrtiou/99767
+when: 1439305893.84063

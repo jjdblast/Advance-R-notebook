@@ -71,6 +71,88 @@ img {
 <blockquote>
 <p><code>str()</code> shows you the structure of any object, and <strong>subsetting</strong> allows you to pull out the pieces that you’re interested in.</p>
 </blockquote>
+<div id="data-types" class="section level2">
+<h2>Data types</h2>
+<div id="atomic-vectors" class="section level3">
+<h3>1. Atomic vectors</h3>
+<pre class="r"><code>x &lt;- c(2.1, 4.2, 3.3, 5.4) # number after the decimal point gives the original position in the vector</code></pre>
+<hr />
+<div id="things-you-can-use-to-subset-a-vector" class="section level4">
+<h4>things you can use to subset a vector:</h4>
+<ol style="list-style-type: decimal">
+<li><strong>positive integer</strong> (what you want)</li>
+</ol>
+<pre class="r"><code>x[c(3,1)]</code></pre>
+<pre><code>## [1] 3.3 2.1</code></pre>
+<pre class="r"><code>x[order(x)] # order return sorted index, this line == sort(x)</code></pre>
+<pre><code>## [1] 2.1 3.3 4.2 5.4</code></pre>
+<pre class="r"><code>x[c(1,1)] # return duplicate values</code></pre>
+<pre><code>## [1] 2.1 2.1</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li><strong>negative integer</strong> (what you don’t want)</li>
+</ol>
+<pre class="r"><code>x[-1]</code></pre>
+<pre><code>## [1] 4.2 3.3 5.4</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li><strong>logical vector</strong></li>
+</ol>
+<pre class="r"><code>x[c(TRUE, TRUE, FALSE, FALSE)]</code></pre>
+<pre><code>## [1] 2.1 4.2</code></pre>
+<pre class="r"><code>x[x&gt;3]</code></pre>
+<pre><code>## [1] 4.2 3.3 5.4</code></pre>
+<p>if logical vector is shorter than input vector, it will recycle to be the same length</p>
+<pre class="r"><code>x[c(TRUE, FALSE)]</code></pre>
+<pre><code>## [1] 2.1 3.3</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li><strong>nothing</strong>, <code>x[]</code>: return original vector</li>
+<li><strong>zero</strong>, <code>x[0]</code>: return zero-length vector</li>
+<li><strong>character vectors</strong>, return elements with matching names</li>
+</ol>
+<pre class="r"><code>y &lt;- setNames(x, letters[1:4])
+y[c(&quot;d&quot;, &quot;c&quot;, &quot;a&quot;)]</code></pre>
+<pre><code>##   d   c   a 
+## 5.4 3.3 2.1</code></pre>
+<hr />
+</div>
+</div>
+<div id="matrices-and-arrays" class="section level3">
+<h3>2. Matrices and arrays</h3>
+<pre class="r"><code>a &lt;- matrix(1:9, nrow=3)
+colnames(a) &lt;- c('A', 'B', 'C')
+
+a[1:2, ] # keep all colums</code></pre>
+<pre><code>##      A B C
+## [1,] 1 4 7
+## [2,] 2 5 8</code></pre>
+</div>
+<div id="data-frames" class="section level3">
+<h3>3. Data frames</h3>
+<pre class="r"><code>df &lt;- data.frame(x=1:3, y=3:1, z=letters[1:3])
+df[df$x ==2,] # take 2nd row</code></pre>
+<pre><code>##   x y z
+## 2 2 2 b</code></pre>
+<pre class="r"><code>df[c(1,3), ] # take 1, 3 row</code></pre>
+<pre><code>##   x y z
+## 1 1 3 a
+## 3 3 1 c</code></pre>
+<pre class="r"><code>df[c('x', 'z')] # == df[, c('x', 'z')]</code></pre>
+<pre><code>##   x z
+## 1 1 a
+## 2 2 b
+## 3 3 c</code></pre>
+<p>if only choose one colume,</p>
+<pre class="r"><code>str(df['x']) # this subsetting would not simplify automatically</code></pre>
+<pre><code>## 'data.frame':    3 obs. of  1 variable:
+##  $ x: int  1 2 3</code></pre>
+<pre class="r"><code>str(df[, 'x']) # auto simplify</code></pre>
+<pre><code>##  int [1:3] 1 2 3</code></pre>
+<p>notes inspired from exercise:</p>
+<ul>
+<li><code>upper.tri()</code></li>
+<li><code>diag()</code></li>
+</ul>
+</div>
+</div>
 
 
 </div>
