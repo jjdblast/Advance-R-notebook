@@ -7,14 +7,14 @@ output: html_document
 
 ***
 #Introduction
-There are two meta-techniques that are tremendously helpful for improving your skills as an R programmer: **reading source code** and adopting a **scientific mindset**.
+> There are two meta-techniques that are tremendously helpful for improving your skills as an R programmer: **reading source code** and adopting a **scientific mindset**.
 
 ###1. reading source code:
   * find patterns that are worth emulating
   * find patterns that that you don't like
 
 ###2. scientific mindset:
-  * If you don’t understand how something works, develop a hypothesis, design some experiments, run them, and record the results. And do it again untill you know enough or you know it's not enough.
+> If you don’t understand how something works, develop a hypothesis, design some experiments, run them, and record the results. And do it again untill you know enough or you know it's not enough.
   
 ***
 #Foundations

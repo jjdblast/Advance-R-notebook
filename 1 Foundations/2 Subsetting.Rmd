@@ -4,4 +4,4 @@ author: "Lucas Shen"
 date: "August 10, 2015"
 output: html_document
 ---
-try this
+> `str()` shows you the structure of any object, and **subsetting** allows you to pull out the pieces that you’re interested in.
