@@ -125,6 +125,55 @@ length(no_arg_fn_name)</code></pre>
 </div>
 <div id="lexical-scoping" class="section level1">
 <h1>Lexical scoping</h1>
+<blockquote>
+<p>Lexical scoping looks up symbol values based on how functions were nested <strong>when they were created</strong>, not how they are nested when they are called.</p>
+</blockquote>
+<blockquote>
+<p>With lexical scoping, you don’t need to know how the function is called to figure out where the value of a variable will be looked up. <strong>You just need to look at the function’s definition</strong></p>
+</blockquote>
+<div id="name-masking" class="section level3">
+<h3>name masking</h3>
+<ul>
+<li>The key is: <strong>the context is decided at where the function is created</strong>! However, for lousy code you may use varialbe that is in global scope and may depend on the runtime…
+<ul>
+<li><code>codetools::findGlobals(fn_name)</code> -&gt; lists all the external dependencies of a function</li>
+</ul></li>
+<li>for function name, it works the same on one caveat:</li>
+</ul>
+<blockquote>
+<p>if you are using a name in a context where it’s obvious that you want a function (e.g., f(3)), R will ignore objects that are not functions while it is searching.</p>
+</blockquote>
+</div>
+<div id="fresh-start" class="section level3">
+<h3>fresh start</h3>
+<blockquote>
+<p>Every time a function is called, a new environment is created to host execution. A function has no way to tell what happened the last time it was run; each invocation is completely independent.</p>
+</blockquote>
+<hr />
+</div>
+</div>
+<div id="every-operation-is-a-function-call" class="section level1">
+<h1>Every operation is a function call</h1>
+<blockquote>
+<p>“To understand computations in R, two slogans are helpful</p>
+<ol style="list-style-type: decimal">
+<li>Everything that exists is an object.</li>
+<li>Everything that happens is a function call.&quot;</li>
+</ol>
+<p>— John Chambers</p>
+</blockquote>
+<pre class="r"><code>3 + 2</code></pre>
+<pre><code>## [1] 5</code></pre>
+<pre class="r"><code>`+`(3, 2)</code></pre>
+<pre><code>## [1] 5</code></pre>
+<pre class="r"><code>1:5 %&gt;% sapply(`+`, 3) # with `+`, we pass the value of +, which is plus, into sapply</code></pre>
+<pre><code>## [1] 4 5 6 7 8</code></pre>
+<pre class="r"><code>1:5 %&gt;% sapply(&quot;+&quot;, 3) # here we pass the function name, +, not the function itself. sapply can magically handle these two situations.</code></pre>
+<pre><code>## [1] 4 5 6 7 8</code></pre>
+<hr />
+</div>
+<div id="function-arguments" class="section level1">
+<h1>Function arguments</h1>
 </div>
 
 

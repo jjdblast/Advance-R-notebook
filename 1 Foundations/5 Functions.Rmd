@@ -48,10 +48,43 @@ objs[objs %>% sapply("is.primitive")] %>% names() %>% head(10) # show up first 1
 ```
 
 ***
-
 #Lexical scoping
+> Lexical scoping looks up symbol values based on how functions were nested **when they were created**, not how they are nested when they are called. 
 
+> With lexical scoping, you don’t need to know how the function is called to figure out where the value of a variable will be looked up. **You just need to look at the function’s definition**
 
+###name masking
+* The key is: **the context is decided at where the function is created**! However, for lousy code you may use varialbe that is in global scope and may depend on the runtime...
+    * `codetools::findGlobals(fn_name)` -> lists all the external dependencies of a function
+
+* for function name, it works the same on one caveat:
+
+> if you are using a name in a context where it’s obvious that you want a function (e.g., f(3)), R will ignore objects that are not functions while it is searching.
+
+###fresh start
+> Every time a function is called, a new environment is created to host execution. A function has no way to tell what happened the last time it was run; each invocation is completely independent.
+
+***
+
+#Every operation is a function call
+
+> “To understand computations in R, two slogans are helpful
+>
+> 1. Everything that exists is an object.
+> 2. Everything that happens is a function call." 
+>
+> — John Chambers
+
+```{r}
+3 + 2
+`+`(3, 2)
+
+1:5 %>% sapply(`+`, 3) # with `+`, we pass the value of +, which is plus, into sapply
+1:5 %>% sapply("+", 3) # here we pass the function name, +, not the function itself. sapply can magically handle these two situations.
+```
+
+***
+#Function arguments
 
 
 
