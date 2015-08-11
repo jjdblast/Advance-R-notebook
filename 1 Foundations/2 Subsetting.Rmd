@@ -52,6 +52,8 @@ a[1:2, ] # keep all colums
 ```
 
 ### 3. Data frames
+> list of columns
+
 ```{r}
 df <- data.frame(x=1:3, y=3:1, z=letters[1:3])
 df[df$x ==2,] # take 2nd row
@@ -68,13 +70,95 @@ notes inspired from exercise:
 
 * `upper.tri()`
 * `diag()`
-```{r}
+
+> Implement your own function that extracts the diagonal entries from a matrix (it should behave like diag(x) where x is a matrix).
+
+```{r my_diag version1}
 my_diag <- function(m){
-  
+  count <- min(ncol(m), nrow(m))
+  if (count>1){
+    res <- c()
+    for (i in 1:count){
+      res <- c(res, m[i,i])
+    }
+    res
+  }
 }
 ```
+```{r}
+a
+my_diag(a)
+```
+**todo: I don't like this version, redo!**
 
+***
+##Subsetting operators
+1. `[[`, return single value
+2. `$`, often used to access variables in a data frame, as in mtcars$cyl or diamonds$carat.
 
+> If list x is a train carrying objects, then `x[[5]]` is the object in car 5; `x[4:6]` is a train of cars 4-6.
+
+```{r}
+a <- list(a=1, b=2)
+a[[1]]
+a[['a']]
+```
+In this named list case, you can see the difference:
+```{r}
+typeof(a[1]) # this is still a list, you could use a[1][[1]] to get a[[1]] value
+typeof(a[[1]]) # this would be "that" value you want
+```
+
+about `$`
+```{r}
+mtcars$cyl
+mtcars[['cyl']]
+```
+
+There’s one important difference between $ and [[. `$` does partial matching
+
+###Simplifying vs preseving
+> **Simplifying** subsets returns the simplest possible data structure that can represent the output, and is useful interactively because it usually gives you what you want. 
+
+> **Preserving** subsetting keeps the structure of the output the same as the input, and is generally better for programming because the result will always be the same type.
+
+![](../pictures/simplify_preserve.png)
+
+###Modify subset
+```{r}
+x <- 1:5
+x[1:3] <- 6:8
+x
+```
+
+> Subsetting with nothing can be useful in conjunction with assignment because it will preserve the original object class and structure.
+
+```{r}
+mtcars[] <- lapply(mtcars, as.integer) # still a data frame
+mtcars <- lapply(mtcars, as.integer) # list
+```
+
+**Todo: skipped application part. To much for now, pick up later**
+
+***
+####exercise:
+
+1. > randomly permute the columns of a data frame?
+
+```{r}
+df
+df2 <- df[sample(nrow(df)), sample(ncol(df))] # row and col same time
+df2
+
+df2 <- df[sample(nrow(df)), ] # suffle only rows, you know how to do only cols
+df2
+```
+
+2. > put the columns in a data frame in alphabetical order?
+
+```{r}
+str(mtcars[order(names(mtcars))])
+```
 
 
 
