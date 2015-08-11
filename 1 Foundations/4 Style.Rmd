@@ -1,0 +1,43 @@
+---
+title: "4 style"
+author: "Lucas Shen"
+date: "August 11, 2015"
+output: html_document
+---
+
+*** 
+##Naming
+> Variable and function names should be lowercase. Use an underscore (_) to separate words within a name.
+
+> Var should be nouns and funciton should be verbs
+
+##Syntax
+> Place spaces around all infix operators (=, +, -, <-, etc.)
+
+> Always put a space after a comma
+
+> An opening curly brace should never go on its own line and should always be followed by a new line. A closing curly brace should always go on its own line, unless it’s followed by else.
+
+```{r eval=F}
+if (y < 0 && debug) {
+  message("Y is negative")
+}
+
+if (y == 0) {
+  log(x)
+} else {
+  y ^ x
+}
+```
+
+##Indentation == 2 space
+
+##Comment
+> Use commented lines of - and = to break up your file into easily readable chunks.
+
+```{r eval = F}
+# Load data ---------------------------
+
+# Plot data ---------------------------
+```
+
