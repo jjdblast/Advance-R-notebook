@@ -90,7 +90,7 @@ img {
 <div id="function-components" class="section level1">
 <h1>Function components</h1>
 <ol style="list-style-type: decimal">
-<li><code>body()</code>: the code inside the funciton</li>
+<li><code>body()</code>: the code inside the function</li>
 <li><code>formals()</code>: list of args</li>
 <li><code>environment()</code>: location of the map to the function’s variables</li>
 </ol>
@@ -132,6 +132,15 @@ length(no_arg_fn_name)</code></pre>
 </blockquote>
 <blockquote>
 <p>With lexical scoping, you don’t need to know how the function is called to figure out where the value of a variable will be looked up. <strong>You just need to look at the function’s definition</strong></p>
+</blockquote>
+<blockquote>
+<p>four basic principles behind R’s implementation of lexical scoping:</p>
+<ol style="list-style-type: decimal">
+<li>name masking</li>
+<li>functions vs. variables</li>
+<li>a fresh start</li>
+<li>dynamic lookup</li>
+</ol>
 </blockquote>
 <div id="name-masking" class="section level3">
 <h3>name masking</h3>

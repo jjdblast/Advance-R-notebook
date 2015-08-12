@@ -89,7 +89,7 @@ my_diag <- function(m){
 a
 my_diag(a)
 ```
-**todo: I don't like this version, redo!**
+#todo: I don't like this version, redo!
 
 ***
 ##Subsetting operators

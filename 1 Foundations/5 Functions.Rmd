@@ -12,7 +12,7 @@ library(pryr)
 ```
 
 #Function components
-1. `body()`: the code inside the funciton
+1. `body()`: the code inside the function
 2. `formals()`: list of args
 3. `environment()`: location of the map to the function's variables 
 
@@ -52,6 +52,13 @@ objs[objs %>% sapply("is.primitive")] %>% names() %>% head(10) # show up first 1
 > Lexical scoping looks up symbol values based on how functions were nested **when they were created**, not how they are nested when they are called. 
 
 > With lexical scoping, you don’t need to know how the function is called to figure out where the value of a variable will be looked up. **You just need to look at the function’s definition**
+
+> four basic principles behind R’s implementation of lexical scoping:
+>
+> 1. name masking
+> 2. functions vs. variables
+> 3. a fresh start
+> 4. dynamic lookup
 
 ###name masking
 * The key is: **the context is decided at where the function is created**! However, for lousy code you may use varialbe that is in global scope and may depend on the runtime...

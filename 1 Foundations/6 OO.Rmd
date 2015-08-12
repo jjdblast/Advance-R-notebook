@@ -1,0 +1,37 @@
+---
+title: "6 OO"
+author: "Lucas Shen"
+date: "August 12, 2015"
+output: html_document
+---
+***
+
+1. S3
+2. S4
+3. Reference Class
+4. base types
+
+#Base types
+> Underlying every R object is a C `struct` that describes how that object is stored in memory. 
+> 
+> 1. contents of the object
+> 2. info for memory management
+> 3. a type
+
+> only the R core team can create new types in this category
+
+***
+#S3
+> Most objects that you encounter are S3 objects.
+
+> In S3, methods belong to functions, called generic functions
+
+###define class and creating objects
+```{r}
+foo <- structure( list(), class ='foo')
+class(foo)
+```
+
+
+#todo: skip this chap, too much for now
+
