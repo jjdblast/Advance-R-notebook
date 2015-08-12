@@ -174,6 +174,62 @@ length(no_arg_fn_name)</code></pre>
 </div>
 <div id="function-arguments" class="section level1">
 <h1>Function arguments</h1>
+<div id="call-funciton" class="section level3">
+<h3>call funciton</h3>
+<blockquote>
+<p>Arguments are matched first by exact name (perfect matching), then by prefix matching, and finally by position.</p>
+</blockquote>
+<ul>
+<li>note: I would avoid using partial matching, and should not abuse positonal matching.</li>
+</ul>
+</div>
+<div id="calling-fn-with-a-list-of-args" class="section level3">
+<h3>calling fn with a list of args</h3>
+<pre class="r"><code>args &lt;- list(1:10, na.rm = TRUE)
+do.call(mean, list(1:10, na.rm = TRUE)) # == mean(1:10, na.rm = TRUE)</code></pre>
+<pre><code>## [1] 5.5</code></pre>
+</div>
+<div id="missing-arguments" class="section level3">
+<h3>missing arguments</h3>
+<blockquote>
+<p>You can determine if an argument was supplied or not with the <code>missing()</code> function.</p>
+</blockquote>
+<pre class="r"><code>miss &lt;- function(x, y){
+  c(missing(x), missing(y))
+}
+
+miss()</code></pre>
+<pre><code>## [1] TRUE TRUE</code></pre>
+<pre class="r"><code>miss(1)</code></pre>
+<pre><code>## [1] FALSE  TRUE</code></pre>
+<pre class="r"><code>miss(1,1)</code></pre>
+<pre><code>## [1] FALSE FALSE</code></pre>
+</div>
+<div id="lazy-eval" class="section level3">
+<h3>lazy eval</h3>
+<blockquote>
+<p>R function arguments are lazy — they’re only evaluated if they’re actually used Laziness is useful in if statements</p>
+</blockquote>
+<pre class="r"><code>a &lt;- NULL
+if (is.null(a)) stop(&quot;a is null&quot;)
+!is.null(a) || stop('a is null')</code></pre>
+<hr />
+</div>
+<div id="section" class="section level3">
+<h3>…</h3>
+<blockquote>
+<p>could use <code>list()</code> to collect … arguments</p>
+</blockquote>
+<pre class="r"><code>f &lt;- function(...) {
+  names(list(...))
+}
+f(a = 1, b = 2)</code></pre>
+<pre><code>## [1] &quot;a&quot; &quot;b&quot;</code></pre>
+<hr />
+</div>
+</div>
+<div id="special-callls" class="section level1">
+<h1>Special callls</h1>
 </div>
 
 

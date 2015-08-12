@@ -85,6 +85,68 @@ objs[objs %>% sapply("is.primitive")] %>% names() %>% head(10) # show up first 1
 
 ***
 #Function arguments
+###call funciton
+> Arguments are matched first by exact name (perfect matching), then by prefix matching, and finally by position.
+
+* note: I would avoid using partial matching, and should not abuse positonal matching.
+
+###calling fn with a list of args
+```{r}
+args <- list(1:10, na.rm = TRUE)
+do.call(mean, list(1:10, na.rm = TRUE)) # == mean(1:10, na.rm = TRUE)
+```
+
+###missing arguments
+> You can determine if an argument was supplied or not with the `missing()` function.
+
+```{r}
+miss <- function(x, y){
+  c(missing(x), missing(y))
+}
+
+miss()
+miss(1)
+miss(1,1)
+```
+
+###lazy eval
+> R function arguments are lazy — they’re only evaluated if they’re actually used
+> Laziness is useful in if statements
+
+```{r eval=F}
+a <- NULL
+if (is.null(a)) stop("a is null")
+!is.null(a) || stop('a is null')
+```
+
+***
+### ...
+> could use `list()` to collect ... arguments
+
+```{r}
+f <- function(...) {
+  names(list(...))
+}
+f(a = 1, b = 2)
+```
+
+***
+#Special callls
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
