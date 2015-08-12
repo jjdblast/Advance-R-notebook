@@ -113,12 +113,42 @@ my_get('x') == get('x')
 ```
 
 #Function environments
+> 1. enclosing, where the function is created
+> 2. binding, `<-` binding fn to name
+> 3. execution, ephemeral execution env that stores variables during execution
+> 4. calling, where the fn is called
+
+###enclosing + binding env
+
+```{r}
+y <- 1
+f <- function(x) x+y
+
+environment(f)
+```
+
+![](../pictures/fn_env.png)
+
+###execution env
+> like what you imagine about the temp env create during a function execution.
 
 
+###calling env
+> if you are using some var in a fn execution, but didn't define it in the body, maybe it needs to resovle the value all the way to globalenv(), this is your calling env that will affect your result of fn call.
 
+#Binding names to values
+> you can not only bind **values** to names, but you can also bind **expressions* (promises) or even **functions**, so that every time you access the value associated with a name, you get something different!
 
+> * regular assignment `<-`, creates a variable in the current environment
+>
+> * deep assignment `<<-`, modifies an existing variable found by walking up the parent environments. If `<<-` doesn’t find an existing variable, it will create one in the **global environment**.
 
-
+```{r}
+x <- 1
+f <- function() x <<- 2
+f()
+x
+```
 
 
 

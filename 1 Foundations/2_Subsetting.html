@@ -242,16 +242,16 @@ mtcars &lt;- lapply(mtcars, as.integer) # list</code></pre>
 ## 3 3 1 c</code></pre>
 <pre class="r"><code>df2 &lt;- df[sample(nrow(df)), sample(ncol(df))] # row and col same time
 df2</code></pre>
-<pre><code>##   z y x
-## 2 b 2 2
-## 1 a 3 1
-## 3 c 1 3</code></pre>
+<pre><code>##   x z y
+## 2 2 b 2
+## 3 3 c 1
+## 1 1 a 3</code></pre>
 <pre class="r"><code>df2 &lt;- df[sample(nrow(df)), ] # suffle only rows, you know how to do only cols
 df2</code></pre>
 <pre><code>##   x y z
-## 2 2 2 b
 ## 3 3 1 c
-## 1 1 3 a</code></pre>
+## 1 1 3 a
+## 2 2 2 b</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li><blockquote>
 <p>put the columns in a data frame in alphabetical order?</p>
