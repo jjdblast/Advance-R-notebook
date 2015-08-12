@@ -34,6 +34,7 @@ This is actully a function, a dictionary, an one level deep relationship.
 ###create env
 ```{r}
 e <- new.env()
+e$name <- 'new env'
 parent.env(e) # see parent env
 ls(e) # list objects of this env
 ```
@@ -62,6 +63,59 @@ exists("x", envir = e, inherits = FALSE) # inherits = F won't look up to global
 ```{r}
 identical(globalenv(), environment())
 ```
+
+####excercise
+> Using parent.env() and a loop (or a recursive function), verify that the ancestors of globalenv() include baseenv() and emptyenv().
+
+```{r}
+find_source <- function(env) {
+  if (identical(env, emptyenv()))
+    return(F)
+  else if (identical(env, baseenv()))
+    return(identical(parent.env(env), emptyenv()))
+  else 
+    find_source(parent.env(env))
+}
+
+find_source(globalenv())
+```
+
+###
+#Recursing over envs
+```{r}
+where <- function(name, env = parent.frame()) {
+  if (identical(env, emptyenv()))
+    stop("Can't find ", name, call. = F)
+  else if (exists(name, envir = env, inherits = F))
+    env
+  else
+    where(name, parent.env(env))
+}
+
+where('filter')
+```
+
+####exercise
+> Write your own version of `get()`
+
+```{r}
+my_get <- function(obj_name, env = parent.frame()) {
+  if (identical(env, emptyenv()))
+    stop("The object doesn't exist", call. = F)
+  else if (exists(obj_name, env))
+    return(env[[obj_name]]) # why env$obj_name not work?
+  else
+    my_get(obj_name, parent.env(env))
+}
+
+x <- 1
+my_get('x') == get('x')
+```
+
+#Function environments
+
+
+
 
 
 

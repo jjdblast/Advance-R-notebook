@@ -106,20 +106,22 @@ img {
 <div id="create-env" class="section level3">
 <h3>create env</h3>
 <pre class="r"><code>e &lt;- new.env()
+e$name &lt;- 'new env'
 parent.env(e) # see parent env</code></pre>
 <pre><code>## &lt;environment: R_GlobalEnv&gt;</code></pre>
 <pre class="r"><code>ls(e) # list objects of this env</code></pre>
-<pre><code>## character(0)</code></pre>
+<pre><code>## [1] &quot;name&quot;</code></pre>
 </div>
 <div id="create-and-modify-bindings" class="section level3">
 <h3>create and modify bindings</h3>
 <pre class="r"><code>e$a &lt;- 1
 e$b &lt;- 2
 ls(e)</code></pre>
-<pre><code>## [1] &quot;a&quot; &quot;b&quot;</code></pre>
+<pre><code>## [1] &quot;a&quot;    &quot;b&quot;    &quot;name&quot;</code></pre>
 <pre class="r"><code>ls.str(e) # show str of every object in this env</code></pre>
 <pre><code>## a :  num 1
-## b :  num 2</code></pre>
+## b :  num 2
+## name :  chr &quot;new env&quot;</code></pre>
 </div>
 <div id="remove-bindings" class="section level3">
 <h3>remove bindings</h3>
@@ -135,6 +137,62 @@ exists(&quot;x&quot;, envir = e, inherits = FALSE) # inherits = F won't look up 
 <div id="compare-env" class="section level3">
 <h3>compare env</h3>
 <pre class="r"><code>identical(globalenv(), environment())</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<div id="excercise" class="section level4">
+<h4>excercise</h4>
+<blockquote>
+<p>Using parent.env() and a loop (or a recursive function), verify that the ancestors of globalenv() include baseenv() and emptyenv().</p>
+</blockquote>
+<pre class="r"><code>find_source &lt;- function(env) {
+  if (identical(env, emptyenv()))
+    return(F)
+  else if (identical(env, baseenv()))
+    return(identical(parent.env(env), emptyenv()))
+  else 
+    find_source(parent.env(env))
+}
+
+find_source(globalenv())</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+</div>
+</div>
+<div id="section" class="section level3">
+<h3></h3>
+</div>
+</div>
+<div id="recursing-over-envs" class="section level1">
+<h1>Recursing over envs</h1>
+<pre class="r"><code>where &lt;- function(name, env = parent.frame()) {
+  if (identical(env, emptyenv()))
+    stop(&quot;Can't find &quot;, name, call. = F)
+  else if (exists(name, envir = env, inherits = F))
+    env
+  else
+    where(name, parent.env(env))
+}
+
+where('filter')</code></pre>
+<pre><code>## &lt;environment: package:stats&gt;
+## attr(,&quot;name&quot;)
+## [1] &quot;package:stats&quot;
+## attr(,&quot;path&quot;)
+## [1] &quot;/Library/Frameworks/R.framework/Versions/3.2/Resources/library/stats&quot;</code></pre>
+<div id="exercise" class="section level4">
+<h4>exercise</h4>
+<blockquote>
+<p>Write your own version of <code>get()</code></p>
+</blockquote>
+<pre class="r"><code>my_get &lt;- function(obj_name, env = parent.frame()) {
+  if (identical(env, emptyenv()))
+    stop(&quot;The object doesn't exist&quot;, call. = F)
+  else if (exists(obj_name, env))
+    return(env[[obj_name]]) # why env$obj_name not work?
+  else
+    my_get(obj_name, parent.env(env))
+}
+
+x &lt;- 1
+my_get('x') == get('x')</code></pre>
 <pre><code>## [1] TRUE</code></pre>
 </div>
 </div>
