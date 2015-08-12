@@ -7,8 +7,8 @@ output: html_document
 ***
 
 ```{r}
-library(pryr)
 library(dplyr)
+library(pryr)
 ```
 
 #Function components
@@ -132,6 +132,37 @@ f(a = 1, b = 2)
 
 ***
 #Special callls
+###Infix functions
+> put the name in backticks because it’s a special name
+
+```{r}
+`%+%` <- function(a, b) paste(a, b)
+"new" %+% " string"
+```
+
+###Replacement functions
+> act like they modify their arguments in place, they actually create a modified copy.
+
+```{r}
+`second<-` <- function(x, value) {
+  x[2] <- value
+  x
+}
+```
+
+#Return values
+> * The last expression evaluated in a function becomes the return value
+>
+> * reserve the use of an explicit `return()` for when you are returning early
+
+###pure funciton
+> pure functions have **no side effects**: they don’t affect the state of the world in any way apart from the value they return.
+
+###On exit
+> The code in `on.exit()` is run regardless of how the function exits, whether with an explicit (early) return, an error, or simply reaching the end of the function body.
+
+
+
 
 
 

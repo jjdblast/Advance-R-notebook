@@ -69,14 +69,9 @@ img {
 
 
 <hr />
-<pre class="r"><code>library(pryr)
-library(dplyr)</code></pre>
+<pre class="r"><code>library(dplyr)</code></pre>
 <pre><code>## 
 ## Attaching package: 'dplyr'
-## 
-## The following object is masked from 'package:pryr':
-## 
-##     %.%
 ## 
 ## The following objects are masked from 'package:stats':
 ## 
@@ -85,6 +80,13 @@ library(dplyr)</code></pre>
 ## The following objects are masked from 'package:base':
 ## 
 ##     intersect, setdiff, setequal, union</code></pre>
+<pre class="r"><code>library(pryr)</code></pre>
+<pre><code>## 
+## Attaching package: 'pryr'
+## 
+## The following object is masked from 'package:dplyr':
+## 
+##     %.%</code></pre>
 <div id="function-components" class="section level1">
 <h1>Function components</h1>
 <ol style="list-style-type: decimal">
@@ -230,6 +232,46 @@ f(a = 1, b = 2)</code></pre>
 </div>
 <div id="special-callls" class="section level1">
 <h1>Special callls</h1>
+<div id="infix-functions" class="section level3">
+<h3>Infix functions</h3>
+<blockquote>
+<p>put the name in backticks because it’s a special name</p>
+</blockquote>
+<pre class="r"><code>`%+%` &lt;- function(a, b) paste(a, b)
+&quot;new&quot; %+% &quot; string&quot;</code></pre>
+<pre><code>## [1] &quot;new  string&quot;</code></pre>
+</div>
+<div id="replacement-functions" class="section level3">
+<h3>Replacement functions</h3>
+<blockquote>
+<p>act like they modify their arguments in place, they actually create a modified copy.</p>
+</blockquote>
+<pre class="r"><code>`second&lt;-` &lt;- function(x, value) {
+  x[2] &lt;- value
+  x
+}</code></pre>
+</div>
+</div>
+<div id="return-values" class="section level1">
+<h1>Return values</h1>
+<blockquote>
+<ul>
+<li><p>The last expression evaluated in a function becomes the return value</p></li>
+<li><p>reserve the use of an explicit <code>return()</code> for when you are returning early</p></li>
+</ul>
+</blockquote>
+<div id="pure-funciton" class="section level3">
+<h3>pure funciton</h3>
+<blockquote>
+<p>pure functions have <strong>no side effects</strong>: they don’t affect the state of the world in any way apart from the value they return.</p>
+</blockquote>
+</div>
+<div id="on-exit" class="section level3">
+<h3>On exit</h3>
+<blockquote>
+<p>The code in <code>on.exit()</code> is run regardless of how the function exits, whether with an explicit (early) return, an error, or simply reaching the end of the function body.</p>
+</blockquote>
+</div>
 </div>
 
 
