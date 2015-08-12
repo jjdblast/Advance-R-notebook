@@ -1,0 +1,47 @@
+---
+title: "8 Debugging, condition handling, defensive programming"
+author: "Lucas Shen"
+date: "August 12, 2015"
+output: html_document
+---
+***
+
+> Let the code communicate problems to you:
+>
+> * `stop()` termiante all execution for fatal errors
+> * `warning()` for potential problems
+> * `message()` give info output that can easily be suppresed, so you don't have to manually switch off debugging message.
+
+> The basic principle of **defensive programming** is to **fail fast**, to raise an error as soon as something goes wrong. 
+>
+> 1. checking that inputs are correct
+> 2. avoiding non-standard evaluation
+> 3. avoiding functions that can return different types of output
+
+***
+#Debugging techniques
+> ###1. Realise that you have a bug
+>
+> ###2. Make it repeatable
+>    * start with a big block of code that you know causes the error and then slowly whittle it down to get to the smallest possible snippet that still causes the error. **Binary search** is particularly useful for this. To do a binary search, you repeatedly remove half of the code until you find the bug.
+>    * If your existing test coverage is low, take the opportunity to add some nearby tests to ensure that existing good behaviour is preserved.
+>
+> ###3. Figure out where it is
+>    * Generate hypotheses, design experiments to test them, and record your results. 
+>    * Systematic approach will end up saving you time. I often waste a lot of time relying on my intuition to solve a bug.
+>
+> ###4. Fix it and test it
+
+[RStudio debugging doc](https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio)
+
+***
+#Debugging tools
+
+
+
+
+
+
+
+
+
