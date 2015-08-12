@@ -1,0 +1,73 @@
+---
+title: "7 Environments"
+author: "Lucas Shen"
+date: "August 12, 2015"
+output: html_document
+---
+***
+
+> Environment has reference semantics -> When you modify a binding in an environment, the environment is not copied; it’s modified in place.
+
+#Basics
+> The job of an environment is to associate as set of names to a set of values.
+
+This is actully a function, a dictionary, an one level deep relationship.
+
+> Every environment has a parent, another environment. The parent is used to implement lexical scoping: if a name is not found in an environment, then R will look in its parent (and so on). Only one environment doesn’t have a parent: the empty environment.
+
+> an environment is similar to a list, with four important exceptions:
+>
+> 1. Every object in an environment has a unique name.
+> 2. The objects in an environment are not ordered (i.e., it doesn’t make sense to ask what the first object in an environment is).
+> 3. An environment has a parent.
+> 4. Environments have reference semantics.
+
+###4 special environments
+1. `globalenv()`, env in which you normally work
+2. `baseenv()`, env of base package, parent = empty
+3. `emptyenv()`, ultimate ancestor of all env
+4. `environment()`, current env
+
+###search path
+![](../pictures/search_path.png)
+
+###create env
+```{r}
+e <- new.env()
+parent.env(e) # see parent env
+ls(e) # list objects of this env
+```
+
+###create and modify bindings
+```{r}
+e$a <- 1
+e$b <- 2
+ls(e)
+ls.str(e) # show str of every object in this env
+```
+
+###remove bindings
+```{r}
+e$a <- NULL # won't remove the binding, just map a to NULL
+rm('a', envir = e) # this is what you want
+```
+
+###check in object's existance
+```{r}
+x <- 2 # in global
+exists("x", envir = e, inherits = FALSE) # inherits = F won't look up to global
+```
+
+###compare env
+```{r}
+identical(globalenv(), environment())
+```
+
+
+
+
+
+
+
+
+
