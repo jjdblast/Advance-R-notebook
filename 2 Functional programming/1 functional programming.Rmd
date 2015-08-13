@@ -1,0 +1,7 @@
+---
+title: "1 functional programming"
+author: "Lucas Shen"
+date: "August 12, 2015"
+output: html_document
+---
+***
